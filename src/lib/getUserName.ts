@@ -1,7 +1,7 @@
 import { faker } from "@faker-js/faker";
 
 const replaceHyphen = (str: string) => {
-  return str.replace("-", "_");
+  return str.replaceAll("-", "_");
 };
 
 export const getUserName = () => {
