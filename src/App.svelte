@@ -1,20 +1,23 @@
 <script lang="ts">
   import "@fontsource/inter";
   import { getUserName } from "./lib/getUserName";
+  import { getPascalCase } from "./lib/getPascalCase";
 
   let suffix = "";
   let prefix = "";
+  let usePascalCase = false;
 
   let userName = getUserName();
-  let displayName = prefix + userName + suffix;
+  let displayName = "";
 
   let copied = false;
 
   $: {
-    displayName = prefix + userName + suffix;
+    displayName = usePascalCase
+      ? prefix + getPascalCase(userName) + suffix
+      : prefix + userName + suffix;
     copied = false;
   }
-
 </script>
 
 <div class="container">
@@ -23,9 +26,15 @@
     <label for="prefix">Prefix</label>
     <input type="text" id="prefix" bind:value={prefix} />
   </div>
+
   <div class="input-group">
     <label for="suffix">Suffix</label>
     <input type="text" id="suffix" bind:value={suffix} />
+  </div>
+
+  <div class="input-group">
+    <label for="usePascalCase">Use PascalCase</label>
+    <input type="checkbox" id="usePascalCase" bind:checked={usePascalCase} />
   </div>
 
   <div class="input-group">
@@ -68,7 +77,7 @@
     margin: 0 auto;
   }
 
-  input {
+  input[type="text"] {
     background: inherit;
     outline: none;
     border: 1px solid #303030;

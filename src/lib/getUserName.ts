@@ -1,12 +1,12 @@
 import { faker } from "@faker-js/faker";
 
+const replaceHyphen = (str: string) => {
+  return str.replace("-", "_");
+};
+
 export const getUserName = () => {
   const adjective = faker.word.adjective();
   const noun = faker.word.noun();
-  return (
-    adjective.charAt(0).toUpperCase() +
-    adjective.slice(1) +
-    noun.charAt(0).toUpperCase() +
-    noun.slice(1)
-  );
+  const result = replaceHyphen(adjective) + "_" + replaceHyphen(noun);
+  return result;
 };
